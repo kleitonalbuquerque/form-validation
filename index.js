@@ -26,7 +26,41 @@ app.use(
 app.use(flash());
 
 app.get("/", (req, res) => {
-  res.send("<h1>Validação de Formulário</h1>");
+  res.render("index");
+});
+
+app.post("/form", (req, res) => {
+  var { email, nome, pontos } = req.body;
+
+  var emailError;
+  var nomeError;
+  var pontosError;
+
+  if (email == undefined || email == "") {
+    emailError = "E-mail não pode ser vazio";
+  }
+
+  if (nome == undefined || nome == "") {
+    nomeError = "Nome não pode ser vazio";
+  }
+
+  if (nome.length < 4) {
+    nomeError = "O nome deve ter mais que 4 caracteres";
+  }
+
+  if (pontos == undefined || pontos < 10) {
+    pontosError = "Você não pode ter menos de 10 pontos";
+  }
+
+  if (
+    emailError != undefined ||
+    nomeError != undefined ||
+    pontosError != undefined
+  ) {
+    res.redirect("/");
+  } else {
+    res.send("Show de bola esse form!");
+  }
 });
 
 app.listen(port, (error) => {
