@@ -56,6 +56,8 @@ app.post("/form", (req, res) => {
   var pontosError;
   var nomeError;
 
+  var msg = "SHOW DE BOLA ESSE FORM!";
+
   if (email == undefined || email == "") {
     emailError = "O e-mail não pode ser vazio";
   }
@@ -86,7 +88,7 @@ app.post("/form", (req, res) => {
 
     res.redirect("/");
   } else {
-    res.send("SHOW DE BOLA ESSE FORM!");
+    res.render("form", { msg: msg, nome: nome, email: email, pontos: pontos });
   }
 });
 
